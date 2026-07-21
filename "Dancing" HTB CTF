@@ -1,3 +1,9 @@
+	"Dancing" HackTheBox Capture the Flag
+
+	Target IP: 10.129.1.12
+
+# START
+
 ┌─[us-starting-point-1-dhcp]─[10.10.14.220]─[heems@htb-kbepmpgdpw]─[~]
 └──╼ [★]$ ping 10.129.1.12
 PING 10.129.1.12 (10.129.1.12) 56(84) bytes of data.
