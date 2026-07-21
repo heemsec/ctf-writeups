@@ -1,5 +1,4 @@
-git mv [-v] [-f] [-n] [-k] <"Dancing" HTB CTF> <Foundations HTB>
-	"Dancing" HackTheBox Capture the Flag
+    "Dancing" HackTheBox Capture the Flag
 
 	Target IP: 10.129.1.12
 
