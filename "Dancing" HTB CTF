@@ -288,4 +288,4 @@ smb: \James.P\> exit
 5f61c10dffbc77a704d76016a22f1664┌─[us-starting-point-1-dhcp]─[10.10.14.220]─[heems@htb-kbepmpgdpw]─[~]
 └──╼ [★]$ 
 
-  # FLAG CAPTURED!
+# FLAG CAPTURED!
